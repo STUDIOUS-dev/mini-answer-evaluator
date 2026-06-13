@@ -1,0 +1,72 @@
+[
+  {
+    "id": "physics_class12",
+    "subject": "Physics (Class 12)",
+    "keywords": [
+      "define", "derive", "formula", "calculate", "unit", "law", "theorem",
+      "numerically", "velocity", "acceleration", "force", "energy", "charge",
+      "current", "wave", "optics", "magnetic", "electric", "resistance",
+      "newton", "joule", "watt", "ohm", "coulomb"
+    ],
+    "criteria": [
+      { "point": "Correct definition or concept stated clearly", "weight": 2 },
+      { "point": "Relevant formula written with correct symbols", "weight": 3 },
+      { "point": "SI units correctly identified for all quantities", "weight": 2 },
+      { "point": "Numerical accuracy / derivation steps correct", "weight": 2 },
+      { "point": "Conciseness and absence of contradictory statements", "weight": 1 }
+    ],
+    "max_marks": 10,
+    "instructions": "Award marks strictly per criterion; deduct for wrong units even if the method is correct."
+  },
+  {
+    "id": "mathematics_class12",
+    "subject": "Mathematics (Class 12)",
+    "keywords": [
+      "solve", "prove", "integrate", "differentiate", "find", "evaluate",
+      "simplify", "matrix", "determinant", "vector", "probability",
+      "equation", "function", "limit", "series", "binomial", "lhs", "rhs",
+      "hence", "show that"
+    ],
+    "criteria": [
+      { "point": "Correct method or approach chosen", "weight": 2 },
+      { "point": "Each step shown clearly with working", "weight": 3 },
+      { "point": "Intermediate calculations correct", "weight": 2 },
+      { "point": "Final answer correct with appropriate form", "weight": 2 },
+      { "point": "Units or domain stated where applicable", "weight": 1 }
+    ],
+    "max_marks": 10,
+    "instructions": "Follow step-marking strictly; a correct final answer with no working shown receives only the final-answer mark."
+  },
+  {
+    "id": "english_class10",
+    "subject": "English (Class 10)",
+    "keywords": [
+      "explain", "describe", "write", "passage", "character", "theme",
+      "poem", "essay", "letter", "story", "author", "meaning", "language",
+      "grammar", "paragraph", "summarise", "analyse", "figure of speech",
+      "metaphor", "simile", "tone", "mood", "narrator", "plot"
+    ],
+    "criteria": [
+      { "point": "Addresses the question directly with relevant key points", "weight": 3 },
+      { "point": "Accurate use of textual evidence or examples", "weight": 2 },
+      { "point": "Clarity and logical flow of ideas", "weight": 2 },
+      { "point": "Grammar, spelling, and sentence construction", "weight": 2 },
+      { "point": "Appropriate vocabulary and register", "weight": 1 }
+    ],
+    "max_marks": 10,
+    "instructions": "Reward depth over length; penalise vague statements that restate the question without adding substance."
+  },
+  {
+    "id": "fallback_general",
+    "subject": "General (Fallback)",
+    "keywords": [],
+    "criteria": [
+      { "point": "Relevance to the question asked", "weight": 3 },
+      { "point": "Coverage of main points expected in the answer", "weight": 3 },
+      { "point": "Logical structure and coherent flow", "weight": 2 },
+      { "point": "Clarity of language and expression", "weight": 2 }
+    ],
+    "max_marks": 10,
+    "instructions": "Use this rubric only when no subject-specific rubric matches; focus on whether the answer is complete and well-reasoned."
+  }
+]
