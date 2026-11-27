@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Answer Evaluator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">✓</span>
+      <div>
+        <h1>Mini Answer Evaluator</h1>
+        <p class="tagline">Rubric-guided vs blind grading, side by side</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span id="api-status" class="pill pill-muted" title="API key status">Checking…</span>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- ───────────── Input panel ───────────── -->
+    <section class="card input-card" aria-labelledby="input-title">
+      <div class="card-head">
+        <h2 id="input-title">Answer to grade</h2>
+        <div class="samples">
+          <label for="sample-select" class="sr-only">Load a sample</label>
+          <select id="sample-select">
+            <option value="">Load a sample…</option>
+          </select>
+        </div>
+      </div>
+
+      <form id="eval-form" novalidate>
+        <div class="field">
+          <div class="field-label">
+            <label for="question">Question</label>
+            <span class="counter" data-for="question">0 / {{ max_question }}</span>
+          </div>
+          <textarea id="question" rows="3" maxlength="{{ max_question }}" required
+            placeholder="e.g. State Ohm's law and write its formula with SI units."></textarea>
+        </div>
+
+        <div class="field">
+          <div class="field-label">
+            <label for="answer">Student's answer</label>
+            <span class="counter" data-for="answer">0 / {{ max_answer }}</span>
+          </div>
+          <textarea id="answer" rows="9" maxlength="{{ max_answer }}" required
+            placeholder="Paste or type the student's answer here…"></textarea>
+        </div>
+
+        <div class="field">
+          <div class="field-label">
+            <label for="rubric-select">Rubric</label>
+            <span id="match-info" class="hint"></span>
+          </div>
+          <select id="rubric-select">
+            <option value="">Auto-detect from question</option>
+          </select>
+          <details id="rubric-preview" class="rubric-preview">
+            <summary>View criteria</summary>
+            <ol id="rubric-criteria"></ol>
+            <p id="rubric-instructions" class="hint"></p>
+          </details>
+        </div>
+
+        <label class="check">
+          <input type="checkbox" id="include-blind" checked>
+          <span>Also run a blind (no-rubric) evaluation for comparison</span>
+        </label>
+
+        <div id="form-error" class="alert alert-error" role="alert" hidden></div>
+
+        <div class="actions">
+          <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            <span class="btn-label">Evaluate</span>
+            <kbd>Ctrl ↵</kbd>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ───────────── Results panel ───────────── -->
+    <section class="results" aria-live="polite" aria-labelledby="results-title">
+      <h2 id="results-title" class="sr-only">Results</h2>
+
+      <div id="empty-state" class="card empty">
+        <div class="empty-icon" aria-hidden="true">📝</div>
+        <h3>No evaluation yet</h3>
+        <p>Enter a question and an answer, then press <strong>Evaluate</strong>. Results show the rubric score, a per‑criterion breakdown, and how a blind evaluation compares.</p>
+      </div>
+
+      <div id="loading" class="card loading" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Evaluating… <span class="hint">both passes run in parallel</span></p>
+      </div>
+
+      <div id="result-view" hidden>
+        <div class="card summary-card">
+          <div class="summary-meta">
+            <span class="pill" id="res-rubric"></span>
+            <span class="hint" id="res-selection"></span>
+          </div>
+          <div class="scores">
+            <div class="score" id="score-guided"></div>
+            <div class="score" id="score-blind"></div>
+          </div>
+          <div id="comparison" class="comparison"></div>
+          <div class="summary-actions">
+            <button type="button" id="copy-btn" class="btn btn-ghost btn-sm">Copy report</button>
+            <button type="button" id="download-btn" class="btn btn-ghost btn-sm">Download JSON</button>
+          </div>
+        </div>
+
+        <div class="card" id="guided-card">
+          <h3>Rubric‑guided evaluation</h3>
+          <div id="guided-body"></div>
+        </div>
+
+        <div class="card" id="blind-card">
+          <h3>Blind evaluation</h3>
+          <div id="blind-body"></div>
+        </div>
+      </div>
+
+      <div class="card history-card">
+        <div class="card-head">
+          <h3>Recent evaluations</h3>
+          <button type="button" id="history-clear" class="btn btn-ghost btn-sm">Clear</button>
+        </div>
+        <ul id="history-list" class="history-list"></ul>
+        <p id="history-empty" class="hint">Evaluations you run are kept in this browser.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
